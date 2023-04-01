@@ -1,37 +1,16 @@
-import React, { useEffect, useState } from "react"
+
 import { Contacts } from "./Contacts/Contacts"
 import { FilterContacts } from "./FilterContacts/FilterContacts"
 import { PhonebookForm } from "./PhonebookForm/PhonebookForm";
-import {Section} from "./App.styled"
-
-export const  App =() => {
-
-  const [contacts, setContacts] = useState([]);
-  const [filter, setFilter] = useState('');
+import { Section } from "./App.styled"
 
 
-  useEffect(() => {
-    const parsedStorage = JSON.parse(localStorage.getItem("contactStorage"));
-    if (parsedStorage !== null) setContacts(parsedStorage);
-  },[])
+import { useSelector } from "react-redux";
 
-
-  useEffect(() => {
-    localStorage.setItem("contactStorage", JSON.stringify(contacts))
-  },[contacts])
-
-
-
-  const addContact = newState => {
-    contacts.some(contact => contact.name === newState.name) ? alert(`${newState.name} is in your list`) : setContacts((prevState) => [...prevState, newState]);
-  };
+export const App = () => {
   
-
-  const filterForm = (evt) => setFilter(evt.target.value);
-  
-
-  const deleteContact = (id) => setContacts((prevState) => prevState.filter(contact => contact.id !== id));
-  
+  const contacts = useSelector(state => state.contacts);
+  const filter = useSelector(state => state.filter);
 
 
 
@@ -44,14 +23,15 @@ export const  App =() => {
     return (
       <Section>
         <h1>Phonebook</h1>
-        < PhonebookForm onSubmit={addContact} />
+        
+        < PhonebookForm  />
         <h2>Contacts</h2>
         < FilterContacts
-            onFilter={filterForm}
-            filter={filter}/>
+          filter={filter}
+        />
         < Contacts
           contacts={filteredContacts}
-          onClick={deleteContact}
+          
            />
       
       </Section>

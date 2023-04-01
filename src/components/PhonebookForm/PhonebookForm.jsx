@@ -1,8 +1,10 @@
 import { Formik, Field } from 'formik';
 import { nanoid } from 'nanoid';
-import PropTypes from 'prop-types';
 import { object, string } from 'yup';
 import { FormStyled, Label, Button } from './FormStyled.styled';
+import { useDispatch } from "react-redux";
+
+import { addContact } from 'redux/contactsSlice';
 
 
 
@@ -19,8 +21,11 @@ const phoneBookSchema = object().shape({
 
 
 
-export const PhonebookForm = ({onSubmit}) => {
+export const PhonebookForm = () => {
     // console.log(onSubmit)
+
+    const dispatch = useDispatch();
+
     return (
         <Formik
             validationSchema={phoneBookSchema}
@@ -28,7 +33,7 @@ export const PhonebookForm = ({onSubmit}) => {
                 name: '',
                 phone: ''}}
             onSubmit={(values, { resetForm }) => {
-                onSubmit({ ...values, id: nanoid() });
+                dispatch(addContact({ ...values, id: nanoid() }));
                 resetForm();
             }}>
             
@@ -52,7 +57,5 @@ export const PhonebookForm = ({onSubmit}) => {
     )
 }
 
-PhonebookForm.propTypes = {
-    onSubmit: PropTypes.func.isRequired,
-}
+
 

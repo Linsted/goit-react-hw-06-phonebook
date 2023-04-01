@@ -3,7 +3,7 @@ import { Item } from './ListItem.styled';
 import { Button } from './ListItem.styled';
 
 export const ListItem = ({ contact : {name, phone, id}, onClick }) => {
-    console.log(name, phone, id)
+    
     
     return (
         <Item>
