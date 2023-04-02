@@ -3,15 +3,16 @@ import { Contacts } from "./Contacts/Contacts"
 import { FilterContacts } from "./FilterContacts/FilterContacts"
 import { PhonebookForm } from "./PhonebookForm/PhonebookForm";
 import { Section } from "./App.styled"
+import { getContactsFromState } from "redux/contactsSlice";
+import { getFilterState } from "redux/filterSlice";
 
 
 import { useSelector } from "react-redux";
 
 export const App = () => {
   
-  const contacts = useSelector(state => state.contacts);
-  const filter = useSelector(state => state.filter);
-
+  const contacts = useSelector(getContactsFromState);
+  const filter = useSelector(getFilterState);
 
 
 

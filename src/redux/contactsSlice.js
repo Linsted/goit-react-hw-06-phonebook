@@ -1,11 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const contactsInitialState = [
-     {id: 'id-1', name: 'Rosie Simpson', number: '459-12-56'},
-    {id: 'id-2', name: 'Hermione Kline', number: '443-89-12'},
-    {id: 'id-3', name: 'Eden Clements', number: '645-17-79'},
-    {id: 'id-4', name: 'Annie Copeland', number: '227-91-26'},
-];
+const contactsInitialState = [];
 
 
 const contactsSlice = createSlice({
@@ -15,7 +10,7 @@ const contactsSlice = createSlice({
     reducers: {
         addContact(state, action) {
             console.log(state)
-            const existingContact = state.forEach(contact => contact.name === action.payload.name);
+            const existingContact = state.find(contact => contact.name === action.payload.name);
             if (existingContact) {
                 alert(`${action.payload.name} is already in your list`);
                 return state;
@@ -33,3 +28,5 @@ const contactsSlice = createSlice({
 
 export const { addContact,deleteContact } = contactsSlice.actions;
 export const contactsReducer = contactsSlice.reducer;
+
+export const getContactsFromState = (state) => state.contacts;

@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import { deleteContact } from 'redux/contactsSlice';
 
 
-export const Contacts = ({contacts, onClick}) => {
+export const Contacts = ({contacts}) => {
   
      
     const dispatch = useDispatch();
@@ -20,5 +20,5 @@ export const Contacts = ({contacts, onClick}) => {
 
 Contacts.propTypes = {
     contacts: PropTypes.arrayOf(PropTypes.object.isRequired,).isRequired,
-    onClick: PropTypes.func.isRequired,
+   
 }
